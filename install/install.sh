@@ -81,9 +81,9 @@ cd $REPOSDIR
 
 # save paths to enviornment and nest_vars as script
 # running the output script cam be added to the run_sim_openfield_recursive.sh script
-echo "#!/bin/sh" > ../cobel-spike/openfield/source_paths.sh
-echo ". $BASEDIR/cobel/bin/activate" >> ../cobel-spike/openfield/source_paths.sh
-echo ". $BASEDIR/nest-simulator-2.20.0_install/bin/nest_vars.sh" >> ../cobel-spike/openfield/source_paths.sh
+echo "#!/bin/sh" > $REPOSDIR/openfield/source_paths.sh
+echo ". $BASEDIR/cobel/bin/activate" >> $REPOSDIR/openfield/source_paths.sh
+echo ". $BASEDIR/nest-simulator-2.20.0_install/bin/nest_vars.sh" >> $REPOSDIR/openfield/source_paths.sh
 chmod +x $REPOSDIR/openfield/source_paths.sh
 
 # remove unnessecary directories
