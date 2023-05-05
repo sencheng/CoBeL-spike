@@ -1,0 +1,418 @@
+{
+  "place": {
+    "model": "parrot_neuron",
+    "model_params": {},
+    "mdl_par_rand": {
+      "flag": false
+    },
+    "ext_inputs": {
+      "model": "music_event_in_proxy",
+      "model_params": {
+        "port_name": "p_in_p"
+      }
+    },
+    "inp_conn": {
+      "conn_spec": {
+        "rule": "one_to_one"
+      }
+    },
+    "targets": "action",
+    "trg_conn": {
+      "conn_spec": {
+        "rule": "all_to_all"
+      },
+      "syn_spec": {
+        "model": "stdp_dopamine_synapse",
+        "weight": 30.0
+      }
+    },
+    "syn_params": {
+      "A_plus": 0.002,
+      "A_minus": -0.002,
+      "tau_c": 200.0,
+      "tau_n": 0.1,
+      "Wmax": 60.0
+    },
+    "trg_conn_rnd": {
+      "flag": true,
+      "dist": "normal",
+      "std": 5.0
+    },
+    "arange_spatial": true,
+    "representation_type": "place",
+    "spatial_prop": {
+      "width": 2.4,
+      "height": 2.4
+    },
+    "cells_prop": {
+      "p_nrows": 0,
+      "p_ncols": 0,
+      "p_row_sigma": 0.2,
+      "p_col_sigma": 0.2,
+      "rep_index": 0,
+      "max_fr": 200
+    },
+    "num_neurons": 0,
+    "sinks": {
+      "spike_detector": {},
+      "weight_recorder": {}
+    }
+  },
+  "grid": {
+    "model": "parrot_neuron",
+    "model_params": {},
+    "mdl_par_rand": {
+      "flag": false
+    },
+    "ext_inputs": {
+      "model": "music_event_in_proxy",
+      "model_params": {
+        "port_name": "p_in_g"
+      }
+    },
+    "inp_conn": {
+      "conn_spec": {
+        "rule": "one_to_one"
+      }
+    },
+    "targets": "action",
+    "trg_conn": {
+      "conn_spec": {
+        "rule": "all_to_all"
+      },
+      "syn_spec": {
+        "model": "stdp_dopamine_synapse",
+        "weight": 30.0
+      }
+    },
+    "syn_params": {
+      "A_plus": 0.005,
+      "A_minus": -0.005,
+      "tau_c": 200.0,
+      "tau_n": 0.1,
+      "Wmax": 60.0
+    },
+    "trg_conn_rnd": {
+      "flag": true,
+      "dist": "normal",
+      "std": 5.0
+    },
+    "arange_spatial": true,
+    "representation_type": "grid",
+    "spatial_prop": {
+      "width": 2.4,
+      "height": 2.4
+    },
+    "cells_prop": {
+      "g_nrows": [
+        7
+      ],
+      "g_ncols": [
+        7
+      ],
+      "g_kappa": [
+        1
+      ],
+      "g_lambda": [
+        1
+      ],
+      "rep_index": 1,
+      "max_fr": [
+        15
+      ]
+    },
+    "num_neurons": 49,
+    "sinks": {
+      "spike_detector": {},
+      "weight_recorder": {}
+    }
+  },
+  "border": {
+    "model": "parrot_neuron",
+    "model_params": {},
+    "mdl_par_rand": {
+      "flag": false
+    },
+    "ext_inputs": {
+      "model": "music_event_in_proxy",
+      "model_params": {
+        "port_name": "p_in_b"
+      }
+    },
+    "inp_conn": {
+      "conn_spec": {
+        "rule": "one_to_one"
+      }
+    },
+    "targets": "action",
+    "trg_conn": {
+      "conn_spec": {
+        "rule": "all_to_all"
+      },
+      "syn_spec": {
+        "model": "static_synapse",
+        "weight": 30.0
+      }
+    },
+    "trg_conn_rnd": {
+      "flag": false,
+      "dist": "normal",
+      "std": 5.0
+    },
+    "arange_spatial": true,
+    "representation_type": "border",
+    "spatial_prop": {
+      "width": 2.4,
+      "height": 2.4
+    },
+    "num_neurons": 8,
+    "cells_prop": {
+      "flag": true,
+      "width": 0.2,
+      "rep_index": 2,
+      "max_fr": 2000.0
+    },
+    "sinks": {
+      "spike_detector": {}
+    }
+  },
+  "obstacle": {
+    "model": "parrot_neuron",
+    "model_params": {},
+    "mdl_par_rand": {
+      "flag": false
+    },
+    "ext_inputs": {
+      "model": "music_event_in_proxy",
+      "model_params": {
+        "port_name": "p_in_o"
+      }
+    },
+    "inp_conn": {
+      "conn_spec": {
+        "rule": "one_to_one"
+      }
+    },
+    "targets": "action",
+    "trg_conn": {
+      "conn_spec": {
+        "rule": "all_to_all"
+      },
+      "syn_spec": {
+        "model": "static_synapse",
+        "weight": 30.0
+      }
+    },
+    "trg_conn_rnd": {
+      "flag": false,
+      "dist": "normal",
+      "std": 5.0
+    },
+    "arange_spatial": true,
+    "representation_type": "obstacle",
+    "spatial_prop": {
+      "width": 2.4,
+      "height": 2.4
+    },
+    "num_neurons": 0,
+    "cells_prop": {
+      "flag": true,
+      "width": 0.2,
+      "rep_index": 3,
+      "max_fr": 2000.0
+    },
+    "sinks": {
+      "spike_detector": {}
+    }
+  },
+  "dopamine_p": {
+    "model": "parrot_neuron",
+    "model_params": {},
+    "mdl_par_rand": {
+      "flag": false
+    },
+    "ext_inputs": {
+      "model": "music_event_in_proxy",
+      "model_params": {
+        "port_name": "p_in_dop_p"
+      }
+    },
+    "inp_conn": {
+      "conn_spec": {
+        "rule": "one_to_one"
+      }
+    },
+    "targets": "place->action",
+    "num_neurons": 0,
+    "trg_conn": {
+      "conn_spec": {
+        "rule": "all_to_all"
+      },
+      "syn_spec": {
+        "weight": 1.0
+      }
+    },
+    "trg_conn_rnd": {
+      "flag": false
+    },
+    "arange_spatial": false,
+    "sinks": {
+      "spike_detector": {}
+    }
+  },
+  "dopamine_g": {
+    "model": "parrot_neuron",
+    "model_params": {},
+    "mdl_par_rand": {
+      "flag": false
+    },
+    "ext_inputs": {
+      "model": "music_event_in_proxy",
+      "model_params": {
+        "port_name": "p_in_dop_g"
+      }
+    },
+    "inp_conn": {
+      "conn_spec": {
+        "rule": "one_to_one"
+      }
+    },
+    "targets": "grid->action",
+    "num_neurons": 1,
+    "trg_conn": {
+      "conn_spec": {
+        "rule": "all_to_all"
+      },
+      "syn_spec": {
+        "weight": 1.0
+      }
+    },
+    "trg_conn_rnd": {
+      "flag": false
+    },
+    "arange_spatial": false,
+    "sinks": {
+      "spike_detector": {}
+    }
+  },
+  "dopamine_b": {
+    "model": "parrot_neuron",
+    "model_params": {},
+    "mdl_par_rand": {
+      "flag": false
+    },
+    "ext_inputs": {
+      "model": "music_event_in_proxy",
+      "model_params": {
+        "port_name": "p_in_dop_b"
+      }
+    },
+    "inp_conn": {
+      "conn_spec": {
+        "rule": "one_to_one"
+      }
+    },
+    "targets": "border->action",
+    "num_neurons": 1,
+    "trg_conn": {
+      "conn_spec": {
+        "rule": "all_to_all"
+      },
+      "syn_spec": {
+        "weight": 1.0
+      }
+    },
+    "trg_conn_rnd": {
+      "flag": false
+    },
+    "arange_spatial": false,
+    "sinks": {
+      "spike_detector": {}
+    }
+  },
+  "dopamine_o": {
+    "model": "parrot_neuron",
+    "model_params": {},
+    "mdl_par_rand": {
+      "flag": false
+    },
+    "ext_inputs": {
+      "model": "music_event_in_proxy",
+      "model_params": {
+        "port_name": "p_in_dop_o"
+      }
+    },
+    "inp_conn": {
+      "conn_spec": {
+        "rule": "one_to_one"
+      }
+    },
+    "targets": "obstacle->action",
+    "num_neurons": 0,
+    "trg_conn": {
+      "conn_spec": {
+        "rule": "all_to_all"
+      },
+      "syn_spec": {
+        "weight": 1.0
+      }
+    },
+    "trg_conn_rnd": {
+      "flag": false
+    },
+    "arange_spatial": false,
+    "sinks": {
+      "spike_detector": {}
+    }
+  },
+  "action": {
+    "model": "iaf_psc_alpha",
+    "model_params": {
+      "tau_syn_ex": 5.0,
+      "tau_syn_in": 5.0
+    },
+    "mdl_par_rand": {
+      "flag": true,
+      "par": "V_th",
+      "dev_from_def": 2.0
+    },
+    "num_neurons": 40,
+    "ext_inputs": {
+      "model": "noise_generator",
+      "model_params": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "inp_conn": {
+      "conn_spec": {
+        "rule": "all_to_all"
+      }
+    },
+    "targets": "action",
+    "trg_conn": {
+      "conn_spec": {
+        "rule": "all_to_all"
+      }
+    },
+    "trg_conn_rnd": {
+      "flag": false
+    },
+    "arange_spatial": false,
+    "sinks": {
+      "spike_detector": {},
+      "music_event_out_proxy": {
+        "params": {
+          "port_name": "p_out"
+        }
+      }
+    },
+    "orientation_sel_dic": {
+      "exp_coef": 20.0,
+      "winh": -400.0,
+      "wexc": 50.0,
+      "mov_step": 0.0001,
+      "tau": 0.05
+    }
+  }
+}

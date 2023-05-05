@@ -1,0 +1,56 @@
+stoptime=101.0
+rtf=1.0
+[reward]
+  binary=zmq_cont_adapter
+  args=
+  np=1
+  music_timestep=0.0001
+  message_type=GymObservation
+  zmq_topic=
+  zmq_addr=tcp://localhost:1000
+[dopspike]
+  binary=dopspike_adapter
+  args=
+  np=1
+  music_timestep=0.0001
+[sensor]
+  binary=zmq_cont_adapter
+  args=
+  np=1
+  music_timestep=0.0001
+  message_type=GymObservation
+  zmq_topic=
+  zmq_addr=tcp://localhost:1001
+[discretize]
+  binary=discretize_adapter_pois
+  args=
+  np=1
+  music_timestep=0.0001
+  grid_positions_filename=grid_pos.json
+  representation_type=x
+[nest]
+  binary=../actor_critic_network/network_runner.py
+  args=-t 400. -n 25 -m 3 -p network_params.json
+  np=1
+  music_timestep=0.0001
+[vecsum]
+  binary=vecsum_adapter
+  args=
+  np=1
+  music_timestep=0.0001
+[command]
+  binary=cont_zmq_adapter
+  args=
+  np=1
+  music_timestep=0.0001
+  min=0
+  max=2
+  message_type=FloatArray
+  zmq_topic=
+  zmq_addr=tcp://*:1002
+sensor.out->discretize.in[2]
+reward.out->dopspike.in[1]
+dopspike.out->nest.p_in_dop[1]
+discretize.out->nest.p_in[449]
+nest.p_out->vecsum.in[40]
+vecsum.out->command.in[3]

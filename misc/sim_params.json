@@ -1,0 +1,9 @@
+{
+  "data_path": "../data/nestsim-test/orig-CAN-20ms-step/data",
+  "local_num_threads": 1,
+  "master_rng_seed": 1,
+  "sim_resolution": 0.1,
+  "overwrite_files": true,
+  "print_time": false,
+  "info_message": false
+}
