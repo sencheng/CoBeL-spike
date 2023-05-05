@@ -27,9 +27,9 @@ python3.8 -m venv ./cobel/
 pip install wheel==0.37.1
 
 ## clone the cobel spike repository
-#git clone git@gitlab.ruhr-uni-bochum.de:cns/1-frameworks/cobel-spike.git 
+#git clone git clone https://github.com/sencheng/CoBeL-spike.git
 # install the repository's dependencies
-pip install -r ../cobel-spike/install/environment.txt
+pip install -r $REPOSDIR/install/environment.txt
 
 
 # install MUSIC 
@@ -84,7 +84,7 @@ cd $REPOSDIR
 echo "#!/bin/sh" > ../cobel-spike/openfield/source_paths.sh
 echo ". $BASEDIR/cobel/bin/activate" >> ../cobel-spike/openfield/source_paths.sh
 echo ". $BASEDIR/nest-simulator-2.20.0_install/bin/nest_vars.sh" >> ../cobel-spike/openfield/source_paths.sh
-chmod +x ../cobel-spike/openfield/source_paths.sh
+chmod +x $REPOSDIR/openfield/source_paths.sh
 
 # remove unnessecary directories
 rm -rf $BASEDIR/music-adapters_build
