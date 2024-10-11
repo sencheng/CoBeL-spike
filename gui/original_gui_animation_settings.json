@@ -1,0 +1,17 @@
+{
+  "animations": [
+    [
+      "agent trajectory",
+      "place",
+      "border"
+    ],
+    [
+      "placeholder",
+      "grid",
+      "action"
+    ]
+  ],
+  "update_rate": 500,
+  "sim_time_interval": 500,
+  "bin_size": 50
+}

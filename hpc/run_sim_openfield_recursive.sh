@@ -17,7 +17,7 @@ if [ $1 -le $2 ]; then
     
     gymz-controller gym openfield.json &
     gym_pid=$(echo $!)
-    mpirun -np 7 music nest_openfield.music
+    mpirun -np 7 music parameter_sets/current_parameter/nest_openfield.music
     # sleep 1m
     kill $gym_pid
     python ../analysis/analysis_test.py

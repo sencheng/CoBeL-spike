@@ -1,0 +1,232 @@
+{
+  "w_obj":{
+    "cell_type": "place"
+  },
+
+  "beh_obj":{
+    "perf_params": [
+      "seed",
+      "trial",
+      "p_ncols",
+      "p_sigma",
+      "A_plus",
+      "A_minus",
+      "p_max_fr",
+      "tr_duration",
+      "traj_length",
+      "goal_size1",
+      "goal_x",
+      "goal_y",
+      "proximity_min",
+      "proximity_mean",
+      "DTW_opt"
+      ]
+  },
+
+  "TRAJECTORY":{
+    "active": true,
+    "formats": ["png"],
+    "title": true,
+    "legend_loc": "out",
+    "ticksize": 10.0,
+    "linewidth":2.5,
+    "markersize":6.0,
+    "titlesize": 12.0,
+    "legendsize":"small",
+    "show_obstacle": true,
+    "show_velocity": true
+  },
+
+  "TRAJECTORY_SUBPLOT1":{
+    "active": false, 
+    "subplot_ids": [
+      [
+        [1, 5, 10],
+        [11, 15, 20],
+        [21, 25, 30]
+      ] 
+    ],
+    "formats": ["png"],
+    "title": true,
+    "legend_loc": "out",
+    "ticksize": 10.0,
+    "linewidth":2.5,
+    "markersize":6.0,
+    "titlesize": 12.0,
+    "legendsize":"small",
+    "show_obstacle": true,
+    "show_velocity": true
+  },
+
+  "TRAJECTORY_SUBPLOT2":{
+    "active": false, 
+    "shape": [3, 10],
+    "formats": ["png"],
+    "title": true,
+    "legend_loc": "out",
+    "ticksize": 10.0,
+    "linewidth":2.5,
+    "markersize":6.0,
+    "titlesize": 12.0,
+    "legendsize":"small",
+    "show_obstacle": true,
+    "show_velocity": true
+  },
+
+  "TRAJECTORY_GIF": {
+    "active": false,
+    "title": true, 
+    "reset_time": true,
+    "show_obstacle": true,
+    "add_legend": true,
+    "frame_dur": 0.05,
+    "last_frame_dur": 1.0,
+    "fps_multiplier": 1.0,
+    "dpi": 300
+  },
+
+  "TRAJECTORY_3D": {
+    "active": false,
+    "formats": ["pdf"],
+    "colorbar_axis": "z",
+    "title": true,
+    "legend_loc": "out"
+  },
+
+  "FIRINGMAP":{
+    "active": false, 
+    "cal_coverage": true,
+    "firing_rate_quota": 0.75,
+    "resolution": 300,
+    "frm":"png",
+    "save": true,
+    "plot_inds": true,
+    "pop_up": false,
+    "show_obs": true
+  },
+
+  "AVR_FR":{
+    "active": false,
+    "pop":["NOISE"],
+    "frm": "png"
+  },
+
+  "ANIMATION":{
+    "active": false, 
+    "flname": [
+        ["loc", "action", "action_ring", "p_stack"],
+        ["weight", "place", "border", "noise"]
+    ],
+    "frame_dur": 20,
+    "trials": [],
+    "summary": false,
+    "dpi": 200
+  },
+  
+  "VEC_FIELD":{ 
+    "active": false,
+    "fl_suffix": "",
+    "frm": "pdf",
+    "cell_type": ["place"],
+    "border_flag": false,
+    "show_obs": false,
+    "title": true
+  },
+
+  "OCCUPANCY": {
+    "active": true,
+    "start": 1,
+    "end": null,
+    "grid_size": 20,
+    "formats": [
+      "png"
+    ],
+    "show_title": true,
+    "show_target": true,
+    "show_colorbar": true,
+    "show_obstacle": true
+  },
+
+  "INTERGOAL_OCC":{
+    "active": false,
+    "start": 1,
+    "end": null,
+    "buckets": 100,
+    "formats": ["png"],
+    "show_obstacle": true
+  },
+
+  "VEC_FIELD_STACK":{
+    "active": false,
+    "fl_suffix": "",
+    "frm": "png",
+    "plot_ind": true,
+    "cell_type": ["place"],
+    "title": true
+  },
+
+  "VEC_FIELD_COMPLETE":{
+    "active": false,
+    "fl_suffix": "",
+    "frm": "pdfs"
+  },
+
+  "WEIGHT_CHANGE":{
+    "active": false,
+    "n_t": 1,
+    "tr_list": null,
+    "pop": ["place"],
+    "plot_all": true,
+    "rotate_dir": null,
+    "calc_all_goals": false,
+    "save_all_vecs": true
+  },
+
+  "WEIGHT_CHANGE_ROTATED":{
+    "active": false,
+    "n_t": 1,
+    "tr_list": null,
+    "pop": ["place"],
+    "plot_all": true,
+    "rotate_dir": [0,1],
+    "calc_all_goals": false,
+    "save_all_vecs": true
+  },
+
+  "DTW":{
+    "active": false,
+    "trials": [1,3],
+    "w": null,
+    "formats": ["png"],
+    "show_obstacle": true,
+    "legend_loc": "best"
+  },
+
+  "DTW_OPT":{
+    "active": false,
+    "calc_all_goals": true,
+    "w": null, 
+    "opt_path_size": 300,
+    "space": 25,
+    "legend_loc": "out",
+    "formats": ["png"]
+  },
+
+  "DTW_ALL":{
+    "active": false,
+    "trials": [],
+    "w": null,
+    "formats": ["png"],
+    "show_obstacle": true,
+    "legend_loc": "best"
+  },
+
+  "PERFORMANCE": {
+    "active": false,
+    "perf_plots": [
+      "tr_duration",
+      "traj_length",
+      "DTW_opt"
+    ] 
+  }
+}

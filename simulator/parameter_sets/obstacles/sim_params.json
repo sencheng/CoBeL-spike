@@ -1,0 +1,41 @@
+{
+  "sim_resolution": 0.1,
+  "max_num_trs": 10,
+  "info_message": false,
+  "data_path": "../data/obstacles/agent1",
+  "input_rng_seed": 1,
+  "PlToAcBoundConn": true,
+  "overwrite_files": true,
+  "local_num_threads": 1,
+  "dt": 0.1,
+  "master_rng_seed": 1,
+  "np_nest": 1,
+  "print_time": false,
+  "simtime": 51000,
+  "trial_params": {
+    "goal_shape": [
+      "rect"
+    ],
+    "goal_size1": [
+      0.55
+    ],
+    "goal_size2": [
+      0.2
+    ],
+    "goal_x": [
+      0.65
+    ],
+    "goal_y": [
+      1.0
+    ],
+    "start_x": [
+      -0.5
+    ],
+    "start_y": [
+      0.5
+    ],
+    "max_tr_dur": [
+      5000
+    ]
+  }
+}

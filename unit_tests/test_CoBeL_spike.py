@@ -81,7 +81,7 @@ class TestCoBeLSpike(unittest.TestCase):
             pass
         ref_data_path = "../unit_tests/reference_datafiles/behavior_data_GT.txt"
         # IT MUST READ FROM SIM_PARAMS.JSON FOR THE FOLLOWING DATA.
-        file_json = 'sim_params.json'
+        file_json = 'parameter_sets/current_parameter/sim_params.json'
         file = open(file_json)
         data_json = json.load(file)
         file.close()

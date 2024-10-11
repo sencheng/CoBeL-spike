@@ -1,55 +1,57 @@
-**Goal**
+# CoBeL-spike
 
-We would like to develop a closed loop system, where we can establish a
-bidirectional connection between behavior and neuronal activity. There are
-networks of spiking model neurons, which give rise to the neuronal activity.
-The neuronal activity is translated into behavior in a given environment, which
-updates the sensory input (e.g. agent's location) to the network.
+## Description
 
----------------------------
+CoBel-Spike is a closed-loop simulator of complex behavior and learning based on spiking neural networks.  The CoBeL-spike tool-chain consists of three main components: the artificial agent, the environment, and a bidirectional interface between behavior and neuronal activity. The agent consists of a spiking neural network that receives sensory inputs and generates motor commands, which control the behavior of the agent in the simulated environment.
+
+
+<div align="center">
+  <img src="images/cobel-spike.webp" alt="Relationship between the components of the CoBeL-spike framework">
+  <p><em>Relationship between the components of the CoBeL-spike framework.</em></p>
+</div>
+
+
+## Table of Contents
+
+- [Installation](#installation)
+  - Manual Installation
+  - Installation with Shell Script
+  - Installation with Docker
+  - High-Performance Computer (HPC) Usage
+- [Using CoBeL-spike](#using-cobel-spike)
+  - Running the simulation
+  - Running the simulation with cpu and memory check
+  - Running the analysis
+  - Changing the parameters
+  - GUI Usage
+  - GUI Usage for Docker
+- [Contributors](#contributors)
+- [Publications](#publications)
+- [License](#license)
+
+## Installation
+
+Step-by-step instructions on how to install CoBel-spike.
+ 
 <details>
-<summary>
-Installation
-</summary>
+  <summary>Manual Installation </summary>
 
-0- Make sure that you have already installed the follow dependencies:
-
+0- Make sure that all the dependencies are installed. Run
 ```bash
-$ sudo apt install -y \
-cython \
-libgsl-dev \
-libltdl-dev \
-libncurses-dev \
-libreadline-dev \
-openmpi-bin \
-libopenmpi-dev
-
-$ sudo apt-get install ffmpeg
-$ sudo apt install pkg-config libjsoncpp-dev libzmq3-dev libblas-dev
+./install/check_packages.sh
 ```
+to see if you have any missing dependencies. The currently supported versions of ubuntu are: 20.04, 22.04 and 24.04    
 
-1- Creation of virtual environments: You can create either a conda environment or a python environment.
-
-Create a conda environment using the `environment.yml`:
-
-```bash
-$ conda env create --file <path_to_repo>/environment.yml
-```
-
-and `activate` to this environment before continuing with step 2:
-
-```bash
-$ conda activate cobel-spike
-```
+1- Creation of python environment:
 
 Create a python environment using the `environment.txt`:
 
 ```bash
-$ python3 -m venv <path_to_dependencies>/cobel
-$ source <path_to_dependencies>/cobel/bin/activate
-$ pip install -r <path_to_repo>/environment.txt
+python3.8 -m venv <path_to_dependencies>/cobel
+source <path_to_dependencies>/cobel/bin/activate
+pip install pip==20.0.2 wheel==0.37.1 setuptools==44.0.0
+pip install -r <path_to_repo>/install/environment.txt
 ```
-
 2- Download MUSIC API from https://github.com/INCF/MUSIC and install is by following
 the instructions provided in the README file there.
 
@@ -85,15 +87,17 @@ $ cmake -DCMAKE_INSTALL_PREFIX:PATH=</install/path> </path/to/NEST/src> \
 
 Then compile and install NEST as per instruction.
 
+
 4- Download and install MUSIC-adapters from https://github.com/bghazinouri/music-adapters.
 The installation instruction is in README.rst. Make sure that you have all dependencies
 required installed (you will find them on top of the installation instruction page).
 
-5- Install the "openfield" environemnt. To do this, you should execute the
+
+5- Install the environment. Download the environment [here](https://github.com/bghazinouri/gym_env). After that you should execute the
 following commands in your terminal:
 
 ```bash
-$ cd <path_to_repo>/gym_env/gym-openfield
+$ cd <path_to_gym_env>/gym-openfield
 $ pip install -e .
 ```
 
@@ -101,7 +105,7 @@ Make sure that you have activated the conda environment created in step 1.
 
 6- You need to update gymz python package installed in step 1 to enable it so that it can deal with
 environments that are not by default in openAIgym. To do so you need to download the updated version of
-gymz from https://github.com/mmohaghegh/python-gymz and run the following commands in
+gymz from https://github.com/bghazinouri/python-gymz and run the following commands in
 the terminal:
 
 ```bash
@@ -141,10 +145,10 @@ export NEST_DOC_DIR=$NEST_INSTALL_DIR/share/doc/nest
 export NEST_MODULE_PATH=$NEST_INSTALL_DIR/lib/nest
 
 # The path where the PyNEST bindings are installed.
-export NEST_PYTHON_PREFIX=$NEST_INSTALL_DIR/lib/python3.7/site-packages
+export NEST_PYTHON_PREFIX=$NEST_INSTALL_DIR/lib/python3.8/site-packages
 
 # The path where python-music bindings are installed.
-export MUSIC_PYTHON=$MUSIC_INSTALL_DIR/lib/python3.7/site-packages
+export MUSIC_PYTHON=$MUSIC_INSTALL_DIR/lib/python3.8/site-packages
 
 export PYTHONPATH=$NEST_PYTHON_PREFIX:$MUSIC_PYTHON:$PYTHONPATH
 
@@ -163,8 +167,8 @@ $ source <path/to/NEST_install_dir>/bin/nest_vars.sh
 9- To run the simulation:
 
 ```bash
-$ cd <path_to_repo>/openfield
-$ ./run_sim_openfield_recursive.sh <first_rng_seed_number> <last_rng_seed_number>
+$ cd <path_to_repo>/simulator
+$ ./run_simulation.sh <first_rng_seed_number> <last_rng_seed_number>
 ```
 
 This shell script receives first and last random number generators (rngs) as input
@@ -186,33 +190,34 @@ $ git clone <http>
 If required, provide the Git username and password.
 </details>
 
----------------------------
 
 <details>
-<summary>
-Shell script
-</summary>
-
-1- Get this repository
+  <summary>Installation with Shell Script</summary>
+1- Clone this repository
 
 2- Navigate to the install directory of this repository
 
-3- Run the script
-
+3- Make sure that all needed dependencies are installed. Run
 ```bash
-$ ./install.sh
+./check_packages
 ```
+Install missing dependencies.
 
-The script requires the nest_vars_example file to be in the same folder. In case your python version is different than
-3.8, update the value inside nest_vars_example file
+4- Run following script to install CoBeL-spike:
+```bash
+./install.sh
+```
+5- Activate the virtual enviorenment and source the path variables in the *simulator* directory of this repository:
+```bash
+source source_paths.sh
+```
+You have to run this command in every new terminal session or add this command in the bashrc.
+
 </details>
 
----------------------------
 
 <details>
-<summary>
-Docker 
-</summary>
+  <summary>Installation with Docker</summary>
 
 1- Install Docker  
 Download and install Docker. Instructions how to install docker are provided in the following
@@ -261,10 +266,10 @@ $ docker run --workdir=path/to/the/working/directory --name=nameOfTheContainer c
 The workdir option specifies the directory of the container and is optional. With the name option you give the container
 a name. This option is as well optional but recommended in order to manage the different containers better.
 Check https://docs.docker.com/engine/reference/run for more options. In COMMAND you can specify any command.  
-In the following is an example how to run the script run_sim_openfield_recursive.sh.
+In the following is an example how to run the simulation.
 
 ```bash
-$ docker run --workdir=/cobel-spike/openfield --name=cobel-spike_job_1_1 cobel-spike ./run_sim_openfield_recursive.sh 1 1
+$ docker run --workdir=/cobel-spike/environment --name=cobel-spike_job_1_1 cobel-spike ./run_simulation.sh 1 1
 ```
 
 4- Get data from the container  
@@ -308,12 +313,8 @@ $ docker rm CONTAINER
 
 </details>
 
----------------------------
-
 <details>
-<summary>
-How to use on a high-performance computer (HPC)
-</summary>
+  <summary> High-Performance Computer (HPC) Usage </summary>
 
 Here we provide the instructions on how to compile and use this system on a HPC.
 The modules and versions provided here are based on the state of CNS HPC on
@@ -434,7 +435,7 @@ For the installation use cmake comand as follow:
 
 `cmake -DCMAKE_INSTALL_PREFIX:PATH=</install/path> -DMUSIC_ROOT_DIR=</path/to/MUSIC_install_dir> -DZMQ_INCLUDE_DIR=</path/to/where/cppzmq/in/step/7/was/extracted>/cppzmq-4.7.1/ </path/to/music-adapters/src>`
 
-8- Install the "openfield" environemnt. To do this, you should execute the
+8- Install the environemnt. To do this, you should execute the
 following commands in your terminal:
 
 ```bash
@@ -523,9 +524,161 @@ then execute `nest_vars.sh` again.
 </details>
 
 
-  
-  
-  
+## Using CoBeL-spike
+<details>
+<summary>Running the simulation</summary>
+The simulation can be started with the script
 
+```bash
+./run_simulation.sh $seed_start $seed_end
+```
+in the directory *simulator* of this repository. *$seed_start* and *$seed_end* determines how many simulation with different seeds should be ran by iterating over each number in-between the seeds, with them being any natural number and *$seed_end* >= *$seed_start*.
+</details>
+
+<details>
+<summary>Runnning the simulation with cpu and memory check</summary>
+In addition to the regular simulation, the simulation can also be started using the script *server_simulate.py" in *simulator*. This file checks in-between each simulation, if the cpu usage is below a specific threshhold and that the selected hard-drive has enough capacity. The script can be called from *simulator* with 
+
+```bash
+python server_simulate.py startSeed endSeed --thresh --checkTime --driveCheck --threshDrive
+```
+Run
+
+```bash
+python server_simulate.py -h
+```
+in *simulator* for further help.
+</details>
+
+<details>
+<summary>Runnning the analysis</summary>
+After each simulation the analysis is ran with the analysis cases (see *Changing the parameters*) specifed in *simulator/parameter_files/current_parameter/analysis_config.json*. If you want to rerun the analysis for one or multiple simulations with e.g. different analysis cases, you can run
+
+```bash
+./run_analysis.sh path
+```
+in *simulator*. The program recursively searches for simulation files in its current directory and child directories.
+</details>
+
+<details>
+<summary>Changing the parameters</summary>
+The simulation requires parameters that can be edited in *simulator/parameter_files/current_parameter/*. With these parameters e.g. the environment, network, time, analysis cases can be changed. We have created some predefined parameter sets that can be set for the simulation. These can be changed with
+
+```bash
+./change_params.sh parameter
+```
+
+Parameter is any folder containing parameters in *simulator/parameter_sets/* like *ABA* or *obstacles*.
+</details>
+
+<details>
+<summary>GUI Usage</summary>
+
+  ### GUI Usage
+
+  This repository contains a PyQt App which can be used to configure the network, environment and simulation parameters. It also displays a real-time animation of the agent in the environment.
+
+  ### Prerequisites
+  - Working installation of CoBeL-spike
+
+  ### Setup and Running
+
+  1. Start the GUI from the `simulator` directory:
+     ```bash
+     python ../gui/app.py
+     ```
+
+You should now see the GUI interface:
+  <div align="center">
+    <img src="images/cobel-spike-gui.png" alt="CoBeL-spike GUI Interface">
+    <p><em>CoBeL-spike GUI Interface</em></p>
+  </div>
+
+  ### GUI Dependencies and Interactions
+  - The GUI initializes by reading JSON files from the `simulator/parameter_sets/original_params/` directory, displaying their contents in the interface.
+  - When the "Start" button is pressed, the GUI writes the current configuration to JSON or DAT files in the `simulator/` directory, preparing for simulation.
+  - Files written to the `simulator/` directory are used by the simulation scripts and may be re-loaded as the default values once the GUI is re-opened.
+  - To maintain compatibility with existing workflows, the GUI's dependencies on the main project are minimized.
+  - Note that significant changes to the JSON files in `simulator/parameter_sets/original_params/` may affect GUI functionality.
+
+</details>
+
+<details>
+  <summary>GUI Usage for Docker</summary>
+
+  ### GUI Usage for Docker
+
+  See *GUI Usage* for further details
+
+  ### Prerequisites
+  - You need Docker, CoBeL-spike and a windowing system attached
+  - Tested with Docker installation on Mac using XQuartz as the windowing system
+
+  ### Setup and Running
+
+  1. Build the Docker container:
+     ```bash
+     docker build -t cobel-spike -f install/Dockerfile .
+     ```
+
+  2. Start XQuartz (for Mac users)
+
+  3. Get your Mac's IP address:
+     ```bash
+     ipconfig getifaddr en0
+     ```
+
+  4. Allow connections from the local machine to the X server:
+     ```bash
+     xhost + <your-mac-ip>
+     ```
+
+  5. Run the Docker container:
+     ```bash
+     docker run -it -e DISPLAY=<your-mac-ip>:0 -v /tmp/.X11-unix:/tmp/.X11-unix --name=csc cobel-spike /bin/bash
+     ```
+
+  6. Inside the container, navigate to the openfield directory:
+     ```bash
+     cd cobel-spike/openfield
+     ```
+
+  7. Start the GUI from the `simulator` directory:
+     ```bash
+     python ../gui/app.py
+     ```
+
+</details>
+
+## Contributors    
+
+Current members:       
+- Amany Omar ([amany.omar@rub.de](mailto:amany.omar@rub.de))
+- Behnam Ghazinouri ([behnam.ghazinouri@rub.de](mailto:behnam.ghazinouri@rub.de))
+- Julia Pronoza ([julia.pronoza@ini.rub.de](mailto:julia.pronoza@ini.rub.de))
+- Masud Ehsani ([masud.ehsani@rub.de](mailto:masud.ehsani@rub.de))
+- Sen Cheng ([sen.cheng@rub.de](mailto:sen.cheng@rub.de))
+
+
+Former members:
+- Amit Pal
+- Issam Boughedda
+- Jonas Aqua
+- Kolja Dorschel
+- Mohammadreza Mohagheghi Nejad
+- Paul Adler
+- Raymond Black
+- Saba Abbbasi
+- Yorick Sens
+
+## Publications
+
+1. Ghazinouri, B., Nejad, M.M. & Cheng, S. Navigation and the efficiency of spatial coding: insights from closed-loop simulations. Brain Struct Funct (2023). [DOI: 10.1007/s00429-023-02637-8](https://doi.org/10.1007/s00429-023-02637-8)
+
+2. Ghazinouri, B., Cheng, S. (2025). The Cost of Behavioral Flexibility: Reversal Learning Driven by a Spiking Neural Network. In: Brock, O., Krichmar, J. (eds) From Animals to Animats 17. SAB 2024. Lecture Notes in Computer Science(), vol 14993. Springer, Cham. [https://doi.org/10.1007/978-3-031-71533-4_23](https://doi.org/10.1007/978-3-031-71533-4_23)
+
+
+## License
+This project is licensed under GNU GENERAL PUBLIC LICENSE - see the [LICENSE](LICENSE) file for details.
 
 

@@ -20,16 +20,11 @@ ESCAPED=$(pwd | sed 's/\//\\\//g')
 
 echo "installing the cobel toolchain in $BASEDIR"
 
-# wheel has to be installed beforhand so all the dependencies can install without error
 mkdir cobel
 python3.8 -m venv ./cobel/
 . $BASEDIR/cobel/bin/activate
-pip install wheel==0.37.1
-
-## clone the cobel spike repository
-#git clone git clone https://github.com/sencheng/CoBeL-spike.git
-# install the repository's dependencies
-pip install -r $REPOSDIR/install/environment.txt
+pip install pip==20.0.2 wheel==0.37.1 setuptools==44.0.0 # installed beforhand so all the dependencies can install without error
+pip install --no-cache-dir -r $REPOSDIR/install/environment.txt
 
 
 # install MUSIC 
@@ -65,10 +60,12 @@ make install
 cd $BASEDIR
 
 # install gym dependencies
-cd $REPOSDIR/gym_env/gym-openfield
+cd $BASEDIR
+git clone https://github.com/bghazinouri/gym_env
+cd gym_env/gym-openfield
 pip install -e .
 cd $BASEDIR
-git clone https://github.com/mmohaghegh/python-gymz.git 
+git clone https://github.com/bghazinouri/python-gymz.git 
 cd python-gymz/
 pip install -e . 
 
@@ -80,11 +77,11 @@ echo $BASEDIR
 cd $REPOSDIR
 
 # save paths to enviornment and nest_vars as script
-# running the output script cam be added to the run_sim_openfield_recursive.sh script
-echo "#!/bin/sh" > $REPOSDIR/openfield/source_paths.sh
-echo ". $BASEDIR/cobel/bin/activate" >> $REPOSDIR/openfield/source_paths.sh
-echo ". $BASEDIR/nest-simulator-2.20.0_install/bin/nest_vars.sh" >> $REPOSDIR/openfield/source_paths.sh
-chmod +x $REPOSDIR/openfield/source_paths.sh
+# running the output script can be added to the run_simulation.sh script
+echo "#!/bin/sh" > $REPOSDIR/simulator/source_paths.sh
+echo ". $BASEDIR/cobel/bin/activate" >> $REPOSDIR/simulator/source_paths.sh
+echo ". $BASEDIR/nest-simulator-2.20.0_install/bin/nest_vars.sh" >> $REPOSDIR/simulator/source_paths.sh
+chmod +x $REPOSDIR/simulator/source_paths.sh
 
 # remove unnessecary directories
 rm -rf $BASEDIR/music-adapters_build

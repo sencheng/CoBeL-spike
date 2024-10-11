@@ -1,0 +1,75 @@
+{
+  "All": {
+    "seed": 1,
+    "write_report": true,
+    "report_file": "report.json",
+    "overwrite_files": true,
+    "prefix": "of",
+    "time_stamp_tolerance": 0.0001
+  },
+  "sim_env": "openfield",
+  "environment": {
+    "tmaze": {
+      "ymax_position": 1.2,
+      "xmax_position": 1.2,
+      "ymin_position": -1.2,
+      "xmin_position": -1.2,
+      "corridor_width": 1.0,
+      "goal_arm_width": 0.6
+    },
+    "openfield": {
+      "ymax_position": 0.2,
+      "xmax_position": 3.0,
+      "ymin_position": -0.2,
+      "xmin_position": -3.0
+    },
+    "obstacles": {
+      "flag": false,
+      "centers": [
+        [
+          0.45,
+          0.6
+        ]
+      ],
+      "vert_lengths": [
+        1.2
+      ],
+      "horiz_lengths": [
+        0.3
+      ]
+    },
+    "goal": {
+      "hide_goal": false
+    }
+  },
+  "Env": {
+    "env": "openfield-v0",
+    "user_defined": "gym_openfield",
+    "reward_recep_field": 0.1,
+    "initial_reward": -1.0,
+    "final_reward": null,
+    "render": false,
+    "monitor": true,
+    "monitor_dir": "./",
+    "monitor_args": {
+      "write_upon_reset": false,
+      "video_callable": false
+    }
+  },
+  "EnvRunner": {
+    "update_interval": 0.01,
+    "inter_trial_duration": 0.4
+  },
+  "CommandReceiver": {
+    "socket": 34273,
+    "time_stamp_tolerance": 0.001
+  },
+  "ObservationSender": {
+    "socket": 56041,
+    "update_interval": 0.001
+  },
+  "RewardSender": {
+    "socket": 50759,
+    "update_interval": 0.001
+  }
+}
