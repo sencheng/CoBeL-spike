@@ -185,20 +185,11 @@ if noise["num_neurons"]:
     noise_target_list = list(range(noise["num_neurons"]))
     noise_connect_list = [0] * noise["num_neurons"]
     noise_active_index = [noise['cells_prop']['start_trial']] * noise["num_neurons"]
-    noise_active_time_dummy = [0] * noise["num_neurons"]
+    noise_active_time = [noise['cells_prop']['start_time']] * noise["num_neurons"]
     noise_index_list = [noise['cells_prop']['rep_index']] * noise["num_neurons"]
     noise_fr_list = [noise['cells_prop']['max_fr']] * noise["num_neurons"]
     noise_pos = [[noise_target_list[i], noise_connect_list[i], noise_active_index[i], 
-                  noise_active_time_dummy[i], noise_index_list[i], noise_fr_list[i]] for i in range(len(noise_target_list))]
-   
-    
-                
-# Combine populations into complete list
-pos = pos + place_pos
-pos = pos + grid_pos
-pos = pos + border_pos
-pos = pos + obs_pos
-pos = pos + noise_pos
+                  noise_active_time[i], noise_index_list[i], noise_fr_list[i]] for i in range(len(noise_target_list))]
 
 # Combine populations into a complete list
 pos = pos + place_pos + grid_pos + border_pos + obs_pos + noise_pos

@@ -1,9 +1,5 @@
 #!/bin/bash
 
-: '
-asa
-'
-
 CURRENT_DIR=$(dirname "$0")
 
 RESET_PARAMS=false

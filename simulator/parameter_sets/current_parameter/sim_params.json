@@ -1,20 +1,20 @@
 {
   "sim_resolution": 0.1,
-  "max_num_trs": 10,
+  "max_num_trs": 6,
   "info_message": false,
-  "data_path": "../data/test/agent1",
+  "data_path": "../data/test//agent200",
   "input_rng_seed": 1,
   "PlToAcBoundConn": true,
   "overwrite_files": true,
   "local_num_threads": 1,
   "dt": 0.1,
-  "master_rng_seed": 21,
+  "master_rng_seed": 200,
   "np_nest": 1,
   "print_time": false,
-  "simtime": 51000,
+  "simtime": 31000,
   "trial_params": {
     "goal_shape": [
-      "rect"
+      "round"
     ],
     "goal_size1": [
       0.2
@@ -23,13 +23,13 @@
       0.2
     ],
     "goal_x": [
-      2.8
+      0.5
     ],
     "goal_y": [
-      0.0
+      0.5
     ],
     "start_x": [
-      -2.0
+      0.0
     ],
     "start_y": [
       0.0
@@ -37,6 +37,5 @@
     "max_tr_dur": [
       5000
     ]
-  },
-  "goal_xy": "g0.5--0.5-0.5"
+  }
 }

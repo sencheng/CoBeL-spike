@@ -1,25 +1,39 @@
 #!/bin/bash
 
-: '
-Performs the analysis for all agent-directories of the given path.
-Can be used for updating the analysis_config and rerunning the analysis.
-When starting the script input the path to the data folder like e.g. ./run_analysis.sh /../data
-'
-
-# Check if the provided path is a valid directory
-if [ "$#" -ne 1 ]; then
-  echo "Error: run_analysis.sh requires exactly one parameter."
-  echo "Input one data directory, e.g. './data/test'"
-  echo "Usage: $0 <parameter>"
+# Check if a path is provided as an argument
+if [ -z "$1" ]; then
+  echo "Usage: $0 <path>"
   exit 1
 fi
 
+# Get the provided path
 input_path=$1
 
-dirs=$(find "$input_path" -type d -regex '.*/agent[0-9]+$')
-for dir in $dirs; do
-  num=$(echo $(basename "$dir") | grep -o '[0-9]\+')
-  echo "Processing directory: $dir with num: $num"
+# Check if the provided path is a valid directory
+if [ ! -d "$input_path" ]; then
+  echo "Error: $input_path is not a valid directory"
+  exit 1
+fi
 
-  python ../analysis/analysis_runner.py --path "$dir" --num "$num"
+# Iterate over each directory matching the pattern fig-x
+for dir in "$input_path"/fig-[0-9]*; do
+  # Check if it is indeed a directory
+  if [ -d "$dir" ]; then
+    # Execute the Python script in the directory
+    echo "Processing directory: $dir"
+
+    # Extract the number from the directory name
+    dir_name=$(basename "$dir")
+    num=$(echo "$dir_name" | grep -o '[0-9]\+')
+
+    echo "$dir_name"
+    echo "$num"
+
+
+    # Construct the new data path
+    new_data_path="${input_path}/agent${num}"
+
+    python simulation_files/change_sim_params.py "$new_data_path" "$num"
+    python ../analysis/analysis_runner.py
+  fi
 done

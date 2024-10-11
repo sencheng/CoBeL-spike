@@ -1,0 +1,66 @@
+stoptime=33.0
+rtf=1.0
+[command]
+  binary=cont_zmq_adapter
+  args=
+  np=1
+  music_timestep=0.0001
+  min=0
+  max=2
+  message_type=FloatArray
+  zmq_topic=
+  zmq_addr=tcp://*:45653
+[discretize_b]
+  binary=discretize_adapter_pois
+  args=
+  np=1
+  music_timestep=0.0001
+  grid_positions_filename=grid_pos.json
+  representation_type=border
+[discretize_p]
+  binary=discretize_adapter_pois
+  args=
+  np=1
+  music_timestep=0.0001
+  grid_positions_filename=grid_pos.json
+  representation_type=place
+[dopspike]
+  binary=dopspike_adapter
+  args=
+  np=1
+  music_timestep=0.0001
+[nest]
+  binary=../actor_critic_network/network_runner.py
+  args=-t 400. -n 25 -m 4 -p network_params.json
+  np=1
+  music_timestep=0.0001
+[reward]
+  binary=zmq_cont_adapter
+  args=
+  np=1
+  music_timestep=0.0001
+  message_type=GymObservation
+  zmq_topic=
+  zmq_addr=tcp://localhost:56147
+[sensor]
+  binary=zmq_cont_adapter
+  args=
+  np=1
+  music_timestep=0.0001
+  message_type=GymObservation
+  zmq_topic=
+  zmq_addr=tcp://localhost:36649
+[vecsum]
+  binary=vecsum_adapter
+  args=
+  np=1
+  music_timestep=0.0001
+discretize_b.out->nest.p_in_b[8]
+discretize_p.out->nest.p_in_p[441]
+dopspike.out->nest.p_in_dop_b[1]
+dopspike.out->nest.p_in_dop_p[1]
+nest.p_out->vecsum.in[40]
+reward.out->dopspike.in[1]
+sensor.out->discretize_b.in[4]
+sensor.out->discretize_p.in[4]
+vecsum.out->command.in[3]

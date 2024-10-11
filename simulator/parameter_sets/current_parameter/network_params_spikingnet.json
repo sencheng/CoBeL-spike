@@ -27,11 +27,11 @@
       }
     },
     "syn_params": {
-      "A_plus": 0.3,
-      "A_minus": -0.3,
+      "A_plus": 0.1,
+      "A_minus": -0.1,
       "tau_c": 200.0,
       "tau_n": 0.1,
-      "Wmax": 40.0
+      "Wmax": 60.0
     },
     "trg_conn_rnd": {
       "flag": true,
@@ -41,18 +41,18 @@
     "arange_spatial": true,
     "representation_type": "place",
     "spatial_prop": {
-      "width": 6.0,
-      "height": 0.4
+      "width": 2.4,
+      "height": 2.4
     },
     "cells_prop": {
-      "p_nrows": 72,
-      "p_ncols": 1,
+      "p_nrows": 21,
+      "p_ncols": 21,
       "p_row_sigma": 0.2,
       "p_col_sigma": 0.2,
       "rep_index": 0,
-      "max_fr": 400
+      "max_fr": 200
     },
-    "num_neurons": 72,
+    "num_neurons": 441,
     "sinks": {
       "spike_detector": {},
       "weight_recorder": {}
@@ -100,8 +100,8 @@
     "arange_spatial": true,
     "representation_type": "grid",
     "spatial_prop": {
-      "width": 6.0,
-      "height": 0.4
+      "width": 2.4,
+      "height": 2.4
     },
     "cells_prop": {
       "g_nrows": [
@@ -162,15 +162,15 @@
     "arange_spatial": true,
     "representation_type": "border",
     "spatial_prop": {
-      "width": 6.0,
-      "height": 0.4
+      "width": 2.4,
+      "height": 2.4
     },
     "num_neurons": 8,
     "cells_prop": {
       "flag": true,
-      "width": 0.05,
+      "width": 0.2,
       "rep_index": 2,
-      "max_fr": 400.0
+      "max_fr": 2000.0
     },
     "sinks": {
       "spike_detector": {}
@@ -211,8 +211,8 @@
     "arange_spatial": true,
     "representation_type": "obstacle",
     "spatial_prop": {
-      "width": 6.0,
-      "height": 0.4
+      "width": 2.4,
+      "height": 2.4
     },
     "num_neurons": 0,
     "cells_prop": {
@@ -260,17 +260,27 @@
     "arange_spatial": false,
     "representation_type": "noise",
     "spatial_prop": {
-      "width": 6.0,
-      "height": 0.4
+      "width": 2.4,
+      "height": 2.4
     },
-    "num_neurons": 40,
+    "num_neurons": 0,
     "cells_prop": {
       "flag": true,
       "width": 0.2,
       "rep_index": 4,
       "start_trial": 0,
       "start_time": 2.5,
-      "max_fr": 2000.0
+      "start_times": [
+        2.5,
+        3.5,
+        4.5
+      ],
+      "end_times": [
+        2.9,
+        3.9,
+        4.9
+      ],
+      "max_fr": 500.0
     },
     "sinks": {
       "spike_detector": {}
@@ -434,7 +444,7 @@
       }
     },
     "targets": "noise->action",
-    "num_neurons": 1,
+    "num_neurons": 0,
     "trg_conn": {
       "conn_spec": {
         "rule": "all_to_all"

@@ -270,8 +270,6 @@
       "rep_index": 4,
       "start_trial" : 0,
       "start_time":2.5,
-      "start_times": [2.5,3.5,4.5],
-      "end_times": [2.9,3.9,4.9],
       "max_fr": 500.0
     },
     "sinks": {
